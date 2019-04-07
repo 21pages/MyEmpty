@@ -70,7 +70,9 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOF, BEEP_Pin|LED0_Pin|LED1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(BEEP_GPIO_Port, BEEP_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PEPin PEPin PEPin */
   GPIO_InitStruct.Pin = KEY2_Pin|KEY1_Pin|KEY0_Pin;
@@ -111,12 +113,7 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
-void 
-MY_GPIO_Init (void)
-{
-  HAL_GPIO_WritePin (LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin (LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-}
+
 /* USER CODE END 2 */
 
 /**

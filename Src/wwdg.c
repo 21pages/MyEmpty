@@ -1,25 +1,61 @@
-
 #include "wwdg.h"
 
-uint8_t WWDG_CNT=0X7F;
+#ifdef HAL_WWDG_MODULE_ENABLED
+#include "explorer_stm32_f407.h"
+
+#define  WWDG_COUNTER_MASK  0X7F
+static WWDG_HandleTypeDef hwwdg;
+
+
+/**
+  *@brief init the WWDG
+  *@param tr:counter,0x7F~0x40
+  *	      wr:window value,0x7F~0x40,tr>wr
+  *       fprer: WWDG_PRESCALER_1,WWDG_PRESCALER_2,WWDG_PRESCALER_4,WWDG_PRESCALER_8
+  */
 void WWDG_Init(uint8_t tr, uint8_t wr, uint32_t fprer)
 {
-	NVIC_InitTypeDef NVIC_InitStructure;
+    hwwdg.Instance = WWDG;
+    hwwdg.Init.Prescaler = fprer;
+    hwwdg.Init.Window    = wr;
+    hwwdg.Init.Counter   = tr & WWDG_COUNTER_MASK;
+    hwwdg.Init.EWIMode   = WWDG_EWI_ENABLE;
 
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG, ENABLE);
-
-	//使能窗口看门狗时钟
-	WWDG_CNT			= tr & WWDG_CNT;			//初始化 WWDG_CNT.
-	WWDG_SetPrescaler(fprer);						//设置分频值
-	WWDG_SetWindowValue(wr);						//设置窗口值
-	WWDG_SetCounter(WWDG_CNT);						//设置计数值
-	WWDG_Enable(WWDG_CNT);							//开启看门狗
-	NVIC_InitStructure.NVIC_IRQChannel = WWDG_IRQn; //窗口看门狗中断
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02; //抢占优先级为 2
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03; //响应优先级为 3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //使能窗口看门狗
-	NVIC_Init(&NVIC_InitStructure);
-	WWDG_ClearFlag();								//清除提前唤醒中断标志位
-	WWDG_EnableIT();								//开启提前唤醒中断
+    if(HAL_WWDG_Init(&hwwdg) != HAL_OK)
+    {
+		Error_Handler();
+    }
+	
 }
+
+void HAL_WWDG_MspInit(WWDG_HandleTypeDef *hwwdg)
+{
+    /* Prevent unused argument(s) compilation warning */
+    UNUSED(hwwdg);
+
+    /*Enable the WWDG Clock*/
+    __HAL_RCC_WWDG_CLK_ENABLE();
+
+	HAL_NVIC_SetPriority(WWDG_IRQn,1,0);
+    HAL_NVIC_EnableIRQ(WWDG_IRQn);
+}
+
+
+void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef* hwwdg)
+{
+	/* Prevent unused argument(s) compilation warning */
+	UNUSED(hwwdg);
+
+	WWDG_Refresh();
+	BSP_BEEP_On();	
+}
+
+
+HAL_StatusTypeDef WWDG_Refresh()
+{
+  return HAL_WWDG_Refresh(&hwwdg);
+}
+
+
+#endif
 

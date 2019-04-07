@@ -44,14 +44,15 @@
 
 /* USER CODE BEGIN Includes */
 #include "iwdg.h"
+#include "wwdg.h"
 #include "key.h"
+#include "explorer_stm32_f407.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-/* Private variables
- * ---------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
 
@@ -59,8 +60,7 @@
 void SystemClock_Config(void);
 
 /* USER CODE BEGIN PFP */
-/* Private function prototypes
- * -----------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
 
 /* USER CODE END PFP */
 
@@ -113,20 +113,37 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+  //MX_GPIO_Init();
+  BSP_LED_Init(LED0);
+  BSP_LED_Init(LED1);
+  BSP_LED_Off(LED0);
+  BSP_LED_Off(LED1);
+  BSP_BEEP_Init();
+  BSP_BEEP_Off();
+  BSP_BUTTON_Init(BUTTON_WKUP, BUTTON_MODE_GPIO);
+  BSP_BUTTON_Init(BUTTON0, BUTTON_MODE_EXTI);
+  BSP_BUTTON_Init(BUTTON1, BUTTON_MODE_EXTI);
+  BSP_BUTTON_Init(BUTTON2, BUTTON_MODE_EXTI);
   MX_USART1_UART_Init();
+  
   /* USER CODE BEGIN 2 */
 #ifdef HAL_IWDG_MODULE_ENABLED
-    MY_GPIO_Init ();
-    HAL_Delay (100);
     IWDG_Init (4, 625);
-    HAL_GPIO_WritePin (LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
 #endif
+#ifdef HAL_WWDG_MODULE_ENABLED
+    /*WWDG clock counter = (PCLK1 (42MHz)/4096)/8) = 1281 Hz (~780 us) 
+    780 * (0x7F - 0x60) = 24.2 ms;
+    780 * (0x7F - 0x40) = 49.1 ms
+    Feed the WWDG every 30~40ms */
+    WWDG_Init (0x7F, 0x60, WWDG_PRESCALER_8);
+#endif
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-    while (1) {
+  while (1)
+  {
 
   /* USER CODE END WHILE */
 
@@ -136,6 +153,16 @@ int main(void)
             IWDG_Feed ();
         }
         HAL_Delay (100);
+#endif
+#ifdef HAL_WWDG_MODULE_ENABLED
+	BSP_LED_Toggle(LED0);
+    	HAL_Delay(40);
+	/* Refresh WWDG: update counter value to 127, the refresh window is: 
+	~780 * (127-80) = 36.6ms < refresh window < ~780 * 64 = 49.9ms */  
+	if(WWDG_Refresh() != HAL_OK)
+	{
+	  Error_Handler();
+	}
 #endif
     }
   /* USER CODE END 3 */
@@ -212,10 +239,10 @@ void SystemClock_Config(void)
 void _Error_Handler(char *file, int line)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state
-     */
-    while (1) {
-    }
+  /* User can add his own implementation to report the HAL error return state */
+  while(1)
+  {
+  }
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -230,9 +257,8 @@ void _Error_Handler(char *file, int line)
 void assert_failed(uint8_t* file, uint32_t line)
 { 
   /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line
-       number, tex: printf("Wrong parameters value: file %s on line %d\r\n",
-       file, line) */
+  /* User can add his own implementation to report the file name and line number,
+     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

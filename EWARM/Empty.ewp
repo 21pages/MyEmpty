@@ -11,7 +11,7 @@
             <name>General</name>
             <archiveVersion>3</archiveVersion>
             <data>
-                <version>30</version>
+                <version>31</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -66,7 +66,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>8.22.2.15993</state>
+                    <state>8.30.1.17146</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -112,7 +112,7 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
+                    <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
@@ -202,6 +202,11 @@
                 </option>
                 <option>
                     <name>TrustZone</name>
+                    <state>0</state>
+                </option>
+                <option>
+                    <name>TrustZoneModes</name>
+                    <version>0</version>
                     <state>0</state>
                 </option>
             </data>
@@ -688,7 +693,7 @@
             <name>ILINK</name>
             <archiveVersion>0</archiveVersion>
             <data>
-                <version>20</version>
+                <version>21</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -1000,6 +1005,10 @@
                     <name>IlinkLocaleSelect</name>
                     <state>1</state>
                 </option>
+                <option>
+                    <name>IlinkTrustzoneImportLibraryOut</name>
+                    <state>###Unitialized###</state>
+                </option>
             </data>
         </settings>
         <settings>
@@ -1158,6 +1167,170 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F\portasm.s</name>
+                <configuration>
+                    <name>Empty</name>
+                    <settings>
+                        <name>AARM</name>
+                        <data>
+                            <version>10</version>
+                            <wantNonLocal>0</wantNonLocal>
+                            <debug>1</debug>
+                            <option>
+                                <name>AObjPrefix</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>AEndian</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>ACaseSensitivity</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>MacroChars</name>
+                                <version>0</version>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AWarnEnable</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AWarnWhat</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AWarnOne</name>
+                                <state></state>
+                            </option>
+                            <option>
+                                <name>AWarnRange1</name>
+                                <state></state>
+                            </option>
+                            <option>
+                                <name>AWarnRange2</name>
+                                <state></state>
+                            </option>
+                            <option>
+                                <name>ADebug</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>AltRegisterNames</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>ADefines</name>
+                                <state></state>
+                            </option>
+                            <option>
+                                <name>AList</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AListHeader</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>AListing</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>Includes</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>MacDefs</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>MacExps</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>MacExec</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>OnlyAssed</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>MultiLine</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>PageLengthCheck</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>PageLength</name>
+                                <state>80</state>
+                            </option>
+                            <option>
+                                <name>TabSpacing</name>
+                                <state>8</state>
+                            </option>
+                            <option>
+                                <name>AXRef</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AXRefDefines</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AXRefInternal</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AXRefDual</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AProcessor</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>AFpuProcessor</name>
+                                <state>1</state>
+                            </option>
+                            <option>
+                                <name>AOutputFile</name>
+                                <state>$FILE_BNAME$.o</state>
+                            </option>
+                            <option>
+                                <name>ALimitErrorsCheck</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>ALimitErrorsEdit</name>
+                                <state>100</state>
+                            </option>
+                            <option>
+                                <name>AIgnoreStdInclude</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AUserIncludes</name>
+                                <state>$PROJ_DIR$\..\Inc</state>
+                            </option>
+                            <option>
+                                <name>AExtraOptionsCheckV2</name>
+                                <state>0</state>
+                            </option>
+                            <option>
+                                <name>AExtraOptionsV2</name>
+                                <state></state>
+                            </option>
+                            <option>
+                                <name>AsmNoLiteralPool</name>
+                                <state>0</state>
+                            </option>
+                        </data>
+                    </settings>
+                </configuration>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\queue.c</name>

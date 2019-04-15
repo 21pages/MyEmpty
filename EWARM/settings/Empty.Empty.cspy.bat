@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\program\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" --backend -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" --backend -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\program\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" "--debug_file=%~1" --backend -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" "--debug_file=%~1" --backend -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
 
 @echo off 
 :end

@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "D:\program\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" --backend -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" --backend -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
 }
 else
 {
-& "D:\program\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" --debug_file=$debugfile --backend -f "D:\learn\stm32\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.general.xcl" --debug_file=$debugfile --backend -f "C:\arm\code\cube\MyEmpty\EWARM\settings\Empty.Empty.driver.xcl" 
 }

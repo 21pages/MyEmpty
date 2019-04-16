@@ -90,7 +90,7 @@ const uint16_t BUTTON_PIN[BUTTONn] = {WKUP_BUTTON_PIN,
 	                                  BUTTON1_PIN,
 	                                  BUTTON2_PIN}; 
 
-const uint16_t BUTTON_IRQn[BUTTONn] = {WKUP_BUTTON_EXTI_IRQn, 
+const IRQn_Type BUTTON_IRQn[BUTTONn] = {WKUP_BUTTON_EXTI_IRQn, 
                                        BUTTON0_EXTI_IRQn,
                                        BUTTON1_EXTI_IRQn,
                                        BUTTON2_EXTI_IRQn};

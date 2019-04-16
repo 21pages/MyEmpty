@@ -237,7 +237,7 @@ extern "C" {
 #endif
 
 #ifndef configUSE_RECURSIVE_MUTEXES
-	#define configUSE_RECURSIVE_MUTEXES 0
+	#define configUSE_RECURSIVE_MUTEXES 1
 #endif
 
 #ifndef configUSE_MUTEXES
@@ -265,7 +265,7 @@ extern "C" {
 #endif
 
 #ifndef configIDLE_SHOULD_YIELD
-	#define configIDLE_SHOULD_YIELD		1
+	#define configIDLE_SHOULD_YIELD		0
 #endif
 
 #if configMAX_TASK_NAME_LEN < 1

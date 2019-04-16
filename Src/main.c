@@ -41,6 +41,7 @@
 #include "stm32f4xx_hal.h"
 #include "usart.h"
 #include "gpio.h"
+#include "cmsis_os.h"
 
 /* USER CODE BEGIN Includes */
 #include "iwdg.h"
@@ -58,7 +59,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
@@ -87,8 +88,7 @@ HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin)
 
 /**
   * @brief  The application entry point.
-  *
-  * @retval None
+  * @retval int
   */
 int main(void)
 {
@@ -139,6 +139,14 @@ int main(void)
 #endif
 
   /* USER CODE END 2 */
+
+  /* Call init function for freertos objects (in freertos.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+  
+  /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
